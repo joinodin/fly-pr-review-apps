@@ -8,8 +8,8 @@ runs:
   using: "docker"
   image: "Dockerfile"
 inputs:
-  name:
-    description: Fly app name
+  app:
+    description: Fly app name (alternatively, set the env FLY_APP)
   image:
     description: Optional pre-existing Docker image to use
   config:
@@ -26,4 +26,10 @@ inputs:
     description: Whether new commits to the PR should re-deploy the Fly app
     default: true
   secrets:
-    description: Secrets to be set on the app. Separate multiple secrets with a space, i.e., `FIRST_SECRET=${{ secrets.FIRST_SECRET }} SECOND_SECRET=${{ secrets.SECOND_SECRET }}`
+    description: White space separated secrets to be set on the app.
+  args:
+    description: White space separated build arguments to be set during deployment.
+  vm:
+    description: VM named size (defaults to shared-cpu-1x).
+  ha:
+    description: Boolean expressing the application needs to be highly available (default is false).
