@@ -51,7 +51,7 @@ fi
 # Create Fly App
 if ! flyctl status --app "$app"; then
   cp "$config" "$config.backup"
-  flyctl launch --no-deploy --copy-config --name "$app" --image "$image" --region "$region" --org "$org" --ha="$ha" --vm-size="$vm" $args
+  flyctl launch --no-deploy --copy-config --name "$app" --image "$image" --regions "$region" --org "$org" --ha="$ha" --vm-size="$vm" $args
   cp "$config.backup" "$config"
 fi
 
@@ -67,7 +67,7 @@ fi
 
 # Deploy the Fly App
 if [ "$INPUT_UPDATE" != "false" ]; then
-  flyctl deploy --config "$config" --app "$app" --region "$region" --image "$image" --region "$region" --strategy immediate --ha="$ha" --vm-size="$vm" $args
+  flyctl deploy --config "$config" --app "$app" --image "$image" --regions "$region" --strategy immediate --ha="$ha" --vm-size="$vm" $args
 fi
 
 # Make some info available to the GitHub workflow.
